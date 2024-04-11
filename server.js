@@ -1,7 +1,21 @@
+const {Client} = require('pg');
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const cors = require('cors');
+require('dotenv').config();
 
+const client = new Client ({
+    host: process.env.HOST,
+    port: process.env.PORT,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
+
+app.use(cors());
 
 // Routes
 
@@ -16,6 +30,14 @@ app.get('/api/workexperience', (req, res) => {
 
 // Lägg till 
 app.post('/api/workexperience', (req, res) => {
+    let companyname = req.body.companyname;
+    let jobtitle = req.body.jobtitle;
+    let location = req.body.location;
+    let startdate = req.body.startdate;
+    let enddate = req.body.enddate;
+    let description = req.body.description;
+
+
     res.json({message:'Lägg till arbetserfarenheter'}); 
 });
 
@@ -31,6 +53,6 @@ app.delete('/api/workexperience/:id', (req, res) => {
 });
 
 // Anslut till till server 
-app.listen(port, () =>{
-    console.log('Server körs på port: ' + port);
+app.listen(process.env.PORT, () =>{
+    console.log('Server körs på port: ' + process.env.PORT);
 })
