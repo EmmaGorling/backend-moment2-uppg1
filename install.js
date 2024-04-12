@@ -31,6 +31,7 @@ DROP TABLE IF EXISTS workexperiences
 // Skapa tabell
 client.query(`
 CREATE TABLE workexperiences (
+    id              SERIAL PRIMARY KEY,
     companyname     VARCHAR(100),
     jobtitle        VARCHAR(100),
     location        VARCHAR(100),
