@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -64,6 +65,7 @@ app.delete('/api/workexperience/:id', (req, res) => {
 });
 
 // Anslut till till server 
-app.listen(process.env.PORT, () =>{
-    console.log('Server körs på port: ' + process.env.PORT);
+app.listen(port, () =>{
+    console.log('Server körs på port: ' + port);
 })
+
