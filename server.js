@@ -8,22 +8,24 @@ require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 
-// Anslut till databas
-const client = new Client({
+// Anslut till databasen
+const client = new Client ({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    user: process.env.DB_USER,
+    user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     ssl: {
         rejectUnauthorized: false,
-    }
+    },
 });
+
+// Meddelanden
 client.connect((err) => {
     if(err) {
-        console.log('Connection to database failed...', err);
+        console.log('Fel vid anslutning:' + err)
     } else {
-        console.log('Connected to database');
+        console.log('Ansluten till databasen...')
     }
 });
 
@@ -99,4 +101,5 @@ app.delete('/api/workexperience/:id', (req, res) => {
 // Anslut till server
 app.listen(port, () => {
     console.log('Ansluten till server: ' + port);
-})
+});
+
