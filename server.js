@@ -1,15 +1,22 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = process.env.PORT || 3000;
+const { Client } = require('pg');
+const port = process.env.CR_PORT || 3000;
 require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
 
 // Anslut till databas
-
-
+const client = new Client(process.env.CR_DBURL);
+client.connect((err) => {
+    if(err) {
+        console.log('Connection to database failed...', err);
+    } else {
+        console.log('Connected to database');
+    }
+});
 
 // Routes
 app.get('/api', (req, res) => {
@@ -81,6 +88,6 @@ app.delete('/api/workexperience/:id', (req, res) => {
 
 
 // Anslut till server
-app.listen(port, () => {
-    console.log('Ansluten till server: ' + port);
+app.listen(process.env.CR_PORT, () => {
+    console.log('Ansluten till server: ' + process.env.CR_PORT);
 })
