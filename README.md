@@ -25,3 +25,5 @@ Ett arbetserfarenhets-objekt skickas/returneras med följande struktur(Ex):
   description: "Verkstadsarbete som innefattar däckskiften, montering av däck på fälg, hjulinställningar med mera."
 }
 ```
+## Länk till webbplats som använder API'et:
+https://emad2301-backend-moment2.netlify.app/
